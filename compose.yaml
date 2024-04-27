@@ -1,0 +1,16 @@
+services:
+  backend:
+    extends:
+      file: compose.prod.yaml
+      service: backend
+    build:
+      target: development
+    environment:
+      CLIENT_DOMAIN: ${CLIENT_DOMAIN}
+    develop:
+      watch:
+        - action: sync
+          path: ./backend
+          target: /app
+        - action: rebuild
+          path: ./backend/requirements.txt

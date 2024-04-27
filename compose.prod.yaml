@@ -1,0 +1,10 @@
+services:
+  backend:
+    image: ${CONTAINER_REGISTRY}/backend
+    container_name: bitsmart-backend
+    build:
+      context: ./backend
+    ports:
+      - ${SERVER_PORT}:${SERVER_PORT}
+    environment:
+      PORT: ${SERVER_PORT}

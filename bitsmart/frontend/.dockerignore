@@ -1,0 +1,5 @@
+**/.DS_Store
+**/dist
+**/Dockerfile*
+**/node_modules
+**/README.md

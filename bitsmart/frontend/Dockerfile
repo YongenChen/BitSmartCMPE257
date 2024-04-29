@@ -3,7 +3,7 @@ WORKDIR /app
 COPY package*.json .
 RUN npm ci
 COPY . .
-CMD ["npm", "start"]
+CMD ["npx", "ng", "serve", "--host", "0.0.0.0"]
 
 FROM development as build
 RUN npm run build

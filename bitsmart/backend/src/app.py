@@ -12,15 +12,6 @@ app = Flask(__name__)
 CORS(app, resources={r"/api/*": {"origins": CLIENT_DOMAIN}})
 
 
-# Handle retrieve price history
-@app.route("/api/history", methods=["GET"])
-def get_price_history():
-    try:
-        return {"message": "WIP"}, 200
-    except Exception as e:
-        return handle_error(e)
-
-
 # Handle price prediction
 @app.route("/api/predict", methods=["GET"])
 def predict_price():

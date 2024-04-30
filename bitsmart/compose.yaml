@@ -14,3 +14,19 @@ services:
           target: /app
         - action: rebuild
           path: ./backend/requirements.txt
+
+  frontend:
+    extends:
+      file: compose.prod.yaml
+      service: frontend
+    build:
+      target: development
+    depends_on:
+      - backend
+    develop:
+      watch:
+        - action: sync
+          path: ./frontend
+          target: /app
+        - action: rebuild
+          path: ./frontend/package.json

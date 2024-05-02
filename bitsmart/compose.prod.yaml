@@ -19,3 +19,4 @@ services:
     environment:
       PORT: ${CLIENT_PORT}
       NGINX_PORT: ${CLIENT_PORT}
+      NG_APP_PREDICT_API: ${PREDICT_API}

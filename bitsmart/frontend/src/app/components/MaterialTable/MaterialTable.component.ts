@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { MatTableModule } from '@angular/material/table';
-import { StockData} from '../../services/MaterialTable.service';
 import { HttpClientModule } from '@angular/common/http';
 import { SharedService } from '../../services/SharedService.service';
 
@@ -13,7 +12,7 @@ import { SharedService } from '../../services/SharedService.service';
 })
 export class MaterialTableComponent implements OnInit {
   displayedColumns: string[] = ['date', 'open', 'high', 'low', 'close', 'adjclose', 'volume'];
-  dataSource: StockData[] = [];
+  dataSource: Object[] = [];
 
   constructor(
     private sharedService: SharedService

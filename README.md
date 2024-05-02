@@ -27,5 +27,5 @@ BitSmart is an application that will predict the best buy and sell times for Bit
 - Directory: `cd bitsmart`
 - Create .env file based on .env.example file
 - Run/build: `docker compose up [-d] [--build] [service-name]`
-- Watch: docker `compose watch [--no-up] [service-name]`
+- Watch: `docker compose watch [--no-up] [service-name]`
 - Clean up: `docker compose down [-v] [--rmi all] [service-name]`

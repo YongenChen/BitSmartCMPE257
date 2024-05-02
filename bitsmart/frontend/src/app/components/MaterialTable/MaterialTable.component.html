@@ -1,0 +1,41 @@
+<h2>Bitcoin USD (BTC-USD) in the Past 7 Days</h2>
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+    <ng-container matColumnDef="date">
+    <th mat-header-cell *matHeaderCellDef> Date </th>
+    <td mat-cell *matCellDef="let element"> {{element.date}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="open">
+    <th mat-header-cell *matHeaderCellDef> Open </th>
+    <td mat-cell *matCellDef="let element"> {{element.open}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="high">
+    <th mat-header-cell *matHeaderCellDef> High </th>
+    <td mat-cell *matCellDef="let element"> {{element.high}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="low">
+    <th mat-header-cell *matHeaderCellDef> Low </th>
+    <td mat-cell *matCellDef="let element"> {{element.low}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="close">
+    <th mat-header-cell *matHeaderCellDef> Close </th>
+    <td mat-cell *matCellDef="let element"> {{element.close}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="adjclose">
+    <th mat-header-cell *matHeaderCellDef> Adj Close </th>
+    <td mat-cell *matCellDef="let element"> {{element.adjclose}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="volume">
+    <th mat-header-cell *matHeaderCellDef> Volume </th>
+    <td mat-cell *matCellDef="let element"> {{element.volume}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>

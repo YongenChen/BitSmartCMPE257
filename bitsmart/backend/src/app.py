@@ -1,4 +1,3 @@
-from datetime import datetime
 from flask import Flask, request
 from flask_cors import CORS
 from sys import stderr
@@ -7,6 +6,7 @@ from config import (
     PORT,
     CLIENT_DOMAIN,
 )
+import services
 
 app = Flask(__name__)
 CORS(app, resources={r"/api/*": {"origins": CLIENT_DOMAIN}})
@@ -17,11 +17,17 @@ CORS(app, resources={r"/api/*": {"origins": CLIENT_DOMAIN}})
 def predict_price():
     try:
         date = request.args.get("date")
-        if not date:
-            raise Exception("InvalidParamError", 400, "date is required")
-        date = datetime.strptime(date, "%Y-%m-%d")
-        print(f"Date: {date}", file=stderr)
-        return {"message": "WIP"}, 200
+        services.validate_date(date)
+
+        initial_investment = request.args.get("initial_investment")
+        services.validate_initial_investment(initial_investment)
+        initial_investment = float(initial_investment)
+
+        prices = services.get_price_data(date)
+        return {
+            "initial_investment": initial_investment,
+            "prices": prices,
+        }, 200
     except Exception as e:
         return handle_error(e)
 
@@ -33,13 +39,9 @@ def handle_error(error):
         return {"name": name, "message": message}, status_code
     except Exception as e:
         print(f"Error: {e}", file=stderr)
-        return (
-            {
-                "name": "ServerError",
-                "message": "An unknown error occurred",
-            },
-            500,
-        )
+        name = "ServerError"
+        message = "An unknown error occurred"
+        return {"name": name, "message": message}, 500
 
 
 # Handle path not found

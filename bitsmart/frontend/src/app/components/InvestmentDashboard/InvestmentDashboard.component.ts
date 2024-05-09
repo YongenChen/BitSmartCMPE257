@@ -7,13 +7,23 @@ import { MatInputModule } from '@angular/material/input';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { DatePicker } from '../DatePicker/DatePicker.component';
 import { SharedService } from '../../services/SharedService.service';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
     selector: 'investmentdashboard',
     templateUrl: 'InvestmentDashboard.component.html',
     styleUrl: 'InvestmentDashboard.component.css',
     standalone: true,
-    imports: [CommonModule, FormsModule, MatCardModule, MatFormFieldModule, MatInputModule, MatDatepickerModule, DatePicker],
+    imports: [
+        CommonModule,
+        FormsModule,
+        MatCardModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatDatepickerModule,
+        DatePicker,
+        MatButtonModule,
+    ],
 })
 export class InvestmentDashboard { 
     initialInvestment: number | null = null;

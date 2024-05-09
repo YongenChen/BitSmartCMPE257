@@ -4,19 +4,19 @@
             <datepicker></datepicker>
         </div>
         <div class="right-column">
+            <div><p>Enter your initial investment: </p></div>
             <mat-form-field appearance="outline">
-                <mat-label>Initial Investment</mat-label>
-                <input matInput [(ngModel)]="initialInvestment" placeholder="Enter amount">
+                <input matInput [(ngModel)]="initialInvestment" placeholder="$ Amount">
             </mat-form-field>
+            <div><p>Best Load Price: </p></div>
             <mat-form-field appearance="outline">
-                <mat-label>Buy Price</mat-label>
-                <input matInput placeholder="Enter buy price">
+                <input matInput [value]="" readonly placeholder="$">
             </mat-form-field>
+            <div><p>Best Sell Price: </p></div>
             <mat-form-field appearance="outline">
-                <mat-label>Sell Price</mat-label>
-                <input matInput placeholder="Enter sell price">
+                <input matInput [value]="" readonly placeholder="$">
             </mat-form-field>
-            <button mat-raised-button color="primary" (click)="submitData()">Submit</button>
+            <button mat-flat-button color="accent" (click)="submitData()">Submit</button>
         </div>
     </div>
 </mat-card>

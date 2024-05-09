@@ -6,7 +6,7 @@
         <div class="right-column">
             <mat-form-field appearance="outline">
                 <mat-label>Initial Investment</mat-label>
-                <input matInput placeholder="Enter amount">
+                <input matInput [(ngModel)]="initialInvestment" placeholder="Enter amount">
             </mat-form-field>
             <mat-form-field appearance="outline">
                 <mat-label>Buy Price</mat-label>
@@ -16,6 +16,7 @@
                 <mat-label>Sell Price</mat-label>
                 <input matInput placeholder="Enter sell price">
             </mat-form-field>
+            <button mat-raised-button color="primary" (click)="submitData()">Submit</button>
         </div>
     </div>
 </mat-card>

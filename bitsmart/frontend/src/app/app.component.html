@@ -60,48 +60,48 @@
   }
 
   .main {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  padding: 1rem;
-}
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 1rem;
+  }
 
-.content {
-  width: 100%;
-  max-width: 700px;
-  margin: auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.footer-link {
-  margin-top: auto;
-  padding: 0.75rem 1.5rem;
-  background: var(--gray-700);
-  color: white;
-  text-decoration: none;
-  border-radius: 999px; /* Fully rounded borders */
-  font-weight: 500;
-  font-size: 1rem;
-  text-align: center;
-  width: 100%;
-  max-width: 220px; /* Optimal width for readability */
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-  transition: background-color 0.3s ease;
-}
-
-.footer-link:hover {
-  background-color: var(--bright-blue);
-}
-
-@media screen and (max-width: 650px) {
   .content {
     width: 100%;
+    max-width: 700px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
-}
+
+  .footer-link {
+    margin-top: auto;
+    padding: 0.75rem 1.5rem;
+    background: var(--gray-700);
+    color: white;
+    text-decoration: none;
+    border-radius: 999px;
+    font-weight: 500;
+    font-size: 1rem;
+    text-align: center;
+    width: 100%;
+    max-width: 220px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease;
+  }
+
+  .footer-link:hover {
+    background-color: var(--bright-blue);
+  }
+
+  @media screen and (max-width: 650px) {
+    .content {
+      width: 100%;
+    }
+  }
 
 
   .angular-logo {
@@ -117,10 +117,10 @@
   }
 
   .divider {
-  height: 2px;
-  width: 100%;
-  background: var(--red-to-pink-to-purple-horizontal-gradient);
-  margin: 1rem 0;
+    height: 2px;
+    width: 100%;
+    background: var(--red-to-pink-to-purple-horizontal-gradient);
+    margin: 1rem 0;
   }
 
   .pill-group {
@@ -191,25 +191,25 @@
 <main class="main">
   <div class="content">
 
-      <img src="assets/bitsmartlogo.svg" alt="BitSmart Logo" class="angular-logo">
-      <h1>Buying {{ title }}</h1>
-      <p>Awesome! You're in the right place. 🎉</p>
-      <p>Select a date and we'll tell you when is the best time to buy and sell!</p>
-      <div class="divider" role="separator" aria-label="Divider"></div>
-      <div>
-        <investmentdashboard></investmentdashboard>
-      </div>
-      <br>
-      <h2>Investment Prediction Results</h2>
-      <div>
-        <predictiondashboard></predictiondashboard>
-      </div>
-      <br>
-      <div class="divider" role="separator" aria-label="Divider"></div>
-      <div>
-        <app-material-table></app-material-table>
-      </div>
-      <br>
+    <img src="assets/bitsmartlogo.svg" alt="BitSmart Logo" class="angular-logo">
+    <h1>Buying {{ title }}</h1>
+    <p>Awesome! You're in the right place. 🎉</p>
+    <p>Select a date and we'll tell you when is the best time to buy and sell!</p>
+    <div class="divider" role="separator" aria-label="Divider"></div>
+    <div>
+      <investmentdashboard></investmentdashboard>
+    </div>
+    <br>
+    <h2>Investment Prediction Results</h2>
+    <div>
+      <predictiondashboard></predictiondashboard>
+    </div>
+    <br>
+    <div class="divider" role="separator" aria-label="Divider"></div>
+    <div>
+      <app-material-table></app-material-table>
+    </div>
+    <br>
     <div>
       <div class="pill-group">
         @for (item of [

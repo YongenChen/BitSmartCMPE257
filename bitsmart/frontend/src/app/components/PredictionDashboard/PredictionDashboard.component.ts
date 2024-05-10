@@ -9,7 +9,7 @@ import { MatButtonModule } from '@angular/material/button';
 @Component({
     selector: 'predictiondashboard',
     templateUrl: 'PredictionDashboard.component.html',
-    styleUrl: 'PredictionDashboard.component.css',
+    styleUrls: ['PredictionDashboard.component.css'],
     standalone: true,
     imports: [
         CommonModule,
@@ -20,4 +20,31 @@ import { MatButtonModule } from '@angular/material/button';
         MatButtonModule,
     ],
 })
-export class PredictionDashboard { }
+export class PredictionDashboard {
+    bestLoadPrice: number;
+    bestSellPrice: number;
+    profitLoss: number = 0;
+    profitLossPrefix: string = ''; // + or -
+    profitLossColor: string = 'black'; // green = profit, red = loss
+
+    constructor() {
+        // example initial vals, replace with actual data fetching logic later
+        this.bestLoadPrice = 30000; // get both load/sell from model
+        this.bestSellPrice = 35000;
+        this.calculateProfitLoss();
+    }
+
+    calculateProfitLoss() {
+        this.profitLoss = this.bestSellPrice - this.bestLoadPrice;
+        if (this.profitLoss > 0) {
+            this.profitLossPrefix = '+';
+            this.profitLossColor = 'green';
+        } else if (this.profitLoss < 0) {
+            this.profitLossPrefix = '-';
+            this.profitLossColor = 'red';
+        } else {
+            this.profitLossPrefix = '';
+            this.profitLossColor = 'black'; // black if we broke even
+        }
+    }
+}

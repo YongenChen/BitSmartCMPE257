@@ -1,13 +1,16 @@
 <mat-card class="card">
     <div class="container">
         <div class="left-column">
-            <div><p>Best Load Price: </p></div>
+            <div>
+                <p>Best Load Price: </p>
+            </div>
             <mat-form-field appearance="outline">
-                <input matInput [value]="" readonly placeholder="$">
+                <input matInput [value]="bestLoadPrice" readonly placeholder="$">
             </mat-form-field>
             <p>Profit/Loss</p>
             <mat-form-field appearance="outline">
-                <input matInput [value]="" readonly placeholder="$">
+                <input matInput [value]="profitLossPrefix + profitLoss" readonly [ngStyle]="{'color': profitLossColor}"
+                    placeholder="$">
             </mat-form-field>
             <div>
                 <p>Total Investment Amount: </p>
@@ -17,9 +20,11 @@
             </mat-form-field>
         </div>
         <div class="right-column">
-            <div><p>Best Sell Price: </p></div>
+            <div>
+                <p>Best Sell Price: </p>
+            </div>
             <mat-form-field appearance="outline">
-                <input matInput [value]="" readonly placeholder="$">
+                <input matInput [value]="bestSellPrice" readonly placeholder="$">
             </mat-form-field>
             <p>Total Exit Amount: </p>
             <mat-form-field appearance="outline">

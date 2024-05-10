@@ -1,3 +1,7 @@
+mat-card.mat-mdc-card.mdc-card.card {
+    width: 591px;
+}
+
 .container {
     display: flex;
     justify-content: space-between;
@@ -7,11 +11,16 @@
 
 .left-column,
 .right-column {
-    padding: 20px;
+    padding: 15px;
 }
 
 .left-column {
     flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    padding-top: 20px;
+    padding-left: 20px;
 }
 
 .right-column {
@@ -19,11 +28,6 @@
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    padding-top: 100px;
+    padding-top: 20px;
     padding-right: 20px;
-    margin-right: 20px;
-}
-
-mat-form-field {
-    width: 100%;
 }

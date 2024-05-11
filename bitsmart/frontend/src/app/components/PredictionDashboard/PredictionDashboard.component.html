@@ -1,35 +1,35 @@
 <mat-card class="card">
     <div class="container">
         <div class="left-column">
-            <div><p>Best Load Price: </p></div>
+            <div><p>Best Load Price:</p></div>
             <mat-form-field appearance="outline">
                 <input matInput [value]="" readonly placeholder="$">
             </mat-form-field>
-            <p>Profit/Loss</p>
+            <p>Profit/Loss:</p>
             <mat-form-field appearance="outline">
-                <input matInput [value]="" readonly placeholder="$">
+                <input matInput [value]="dataSource?.profit_loss | currency" readonly placeholder="$">
             </mat-form-field>
             <div>
-                <p>Total Investment Amount: </p>
+                <p>Total Investment Amount:</p>
             </div>
             <mat-form-field appearance="outline">
-                <input matInput [value]="" readonly placeholder="$">
+                <input matInput [value]="dataSource?.total_investment_amount | currency" readonly placeholder="$">
             </mat-form-field>
         </div>
         <div class="right-column">
-            <div><p>Best Sell Price: </p></div>
+            <div><p>Best Sell Price:</p></div>
             <mat-form-field appearance="outline">
                 <input matInput [value]="" readonly placeholder="$">
             </mat-form-field>
-            <p>Total Exit Amount: </p>
+            <p>Total Exit Amount:</p>
             <mat-form-field appearance="outline">
-                <input matInput [value]="" readonly placeholder="$">
+                <input matInput [value]="dataSource?.total_exit_amount | currency" readonly placeholder="$">
             </mat-form-field>
             <div>
-                <p>Avg. Closing Price For Week: </p>
+                <p>Avg. Closing Price For Week:</p>
             </div>
             <mat-form-field appearance="outline">
-                <input matInput [value]="" readonly placeholder="$">
+                <input matInput [value]="dataSource?.average_closing_price | currency" readonly placeholder="$">
             </mat-form-field>
         </div>
     </div>

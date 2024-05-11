@@ -11,7 +11,7 @@ import { SharedService } from '../../services/SharedService.service';
   styleUrl: './MaterialTable.component.css'
 })
 export class MaterialTableComponent implements OnInit {
-  displayedColumns: string[] = ['date', 'open', 'high', 'low', 'close', 'adjclose', 'volume'];
+  displayedColumns: string[] = ['date', 'open', 'high', 'low', 'close'];
   dataSource: Object[] = [];
 
   constructor(
@@ -19,10 +19,10 @@ export class MaterialTableComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.sharedService.selectedDate$.subscribe(date => {
-      if (date) {
-        console.log("Good");
-      }
+    this.sharedService.predictionData$.subscribe(data => {
+      this.dataSource = data;
+      console.log('Material Table Data loaded:', this.dataSource);
     });
   }
+
 }

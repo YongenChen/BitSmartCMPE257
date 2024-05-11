@@ -37,9 +37,9 @@ export class InvestmentDashboard {
     submitData(): void {
         this.sharedService.setInitialInvestment(this.initialInvestment);
 
-        this.sharedService.fetchData().then(response => {
+        this.sharedService.fetchData().then((response: any) => { 
             console.log('API Response received:', response);
-        }).catch(error => {
+        }).catch((error: any) => {
             console.error('Error fetching data from API:', error);
         });
 

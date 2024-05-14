@@ -7,6 +7,7 @@ services:
       target: development
     environment:
       CLIENT_DOMAIN: ${CLIENT_DOMAIN}
+      MODEL_PATH: ${MODEL_PATH}
     develop:
       watch:
         - action: sync

@@ -5,3 +5,4 @@ import dotenv
 dotenv.load_dotenv(dotenv_path=".env")
 PORT = os.getenv("PORT") or 8000
 CLIENT_DOMAIN = os.getenv("CLIENT_DOMAIN") or "*"
+MODEL_PATH = os.getenv("MODEL_PATH") or ""

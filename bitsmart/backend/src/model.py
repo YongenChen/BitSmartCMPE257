@@ -28,12 +28,14 @@ class PredictionModel:
         # Preprocess past pricing data for prediction
         past_data = pd.DataFrame(prices)
         past_data["date"] = pd.to_datetime(past_data["formatted_date"])
-        past_data.dropna(inplace=True)
         past_data = past_data.sort_values(by="date")
         past_data.set_index("date", inplace=True)
         dates = pd.date_range(
-            start=past_data.index.min(), end=past_data.index.max(), freq="D"
+            start=past_data.index.min(),
+            end=past_data.index.max(),
+            freq="D",
         )
+        past_data.dropna(inplace=True)
         past_data = past_data.reindex(dates, method="ffill")
         past_data.reset_index(inplace=True)
         past_data.rename(columns={"index": "date"}, inplace=True)

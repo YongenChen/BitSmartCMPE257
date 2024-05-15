@@ -2,9 +2,9 @@ from flask import Flask, request
 from flask_cors import CORS
 from sys import stderr
 
-from config import PORT, CLIENT_DOMAIN
-from model import PredictionModel
-import utils
+from src.config import CLIENT_DOMAIN
+from src.model import PredictionModel
+from src import utils
 
 app = Flask(__name__)
 CORS(app, resources={r"/api/*": {"origins": CLIENT_DOMAIN}})
@@ -56,7 +56,3 @@ def handle_error(error):
 def path_not_found(_):
     message = f"The requested path {request.path} was not found on server."
     return {"message": message}, 404
-
-
-if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=PORT, debug=True)

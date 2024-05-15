@@ -23,6 +23,8 @@ import { SharedService } from '../../services/SharedService.service';
 })
 export class PredictionDashboard implements OnInit {
     dataSource: any;
+    loadPrice: number | null = null;
+    sellPrice: number | null = null;
 
     constructor(
         private sharedService: SharedService
@@ -35,5 +37,15 @@ export class PredictionDashboard implements OnInit {
                 console.log('Prediction Dashboard Data loaded:', this.dataSource);
             }
         });
+
+        this.sharedService.loadPrice$.subscribe(price => {
+            this.loadPrice = price;
+            console.log('Best Load Price Generated:', this.loadPrice);
+          });
+
+        this.sharedService.sellPrice$.subscribe(price => {
+            this.sellPrice = price;
+            console.log('Best Sell Price Generated:', this.sellPrice);
+          });
     }
 }

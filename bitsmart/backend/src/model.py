@@ -2,8 +2,8 @@ from joblib import load
 from sklearn import *
 import pandas as pd
 
-from config import MODEL_PATH
-import utils
+from src.config import MODEL_PATH
+from src import utils
 
 
 class PredictionModel:

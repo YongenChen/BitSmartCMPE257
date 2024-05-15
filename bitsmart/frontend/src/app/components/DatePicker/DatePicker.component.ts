@@ -36,4 +36,10 @@ export class DatePicker {
         }
         return '';
     }
+
+    myFilter = (d: Date | null): boolean => {
+        const today = new Date();
+        return !!d && (d <= today);
+    }
+
 }

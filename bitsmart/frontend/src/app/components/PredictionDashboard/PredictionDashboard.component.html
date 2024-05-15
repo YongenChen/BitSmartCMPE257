@@ -3,7 +3,7 @@
         <div class="left-column">
             <div><p>Best Load Price:</p></div>
             <mat-form-field appearance="outline">
-                <input matInput [value]="" readonly placeholder="$">
+                <input matInput [value]="loadPrice | currency" readonly placeholder="$">
             </mat-form-field>
             <p>Profit/Loss:</p>
             <mat-form-field appearance="outline">
@@ -19,7 +19,7 @@
         <div class="right-column">
             <div><p>Best Sell Price:</p></div>
             <mat-form-field appearance="outline">
-                <input matInput [value]="" readonly placeholder="$">
+                <input matInput [value]="sellPrice | currency" readonly placeholder="$">
             </mat-form-field>
             <p>Total Exit Amount:</p>
             <mat-form-field appearance="outline">

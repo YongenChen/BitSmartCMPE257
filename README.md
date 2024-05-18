@@ -19,7 +19,7 @@ BitSmart is an application that will predict the best buy and sell times for Bit
 - Have [Python3](https://www.python.org/downloads) installed
 - Directory: `cd bitsmart/backend`
 - Install deps (if needed): `pip3 install -r requirements.txt`
-- Run: `python3 src/app.py`
+- Run: `python3 main.py`
 
 ### With Docker
 

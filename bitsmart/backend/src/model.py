@@ -94,61 +94,80 @@ class PredictionModel:
             raise ValueError("No data available")
 
         # Initialize trading state
-        start_date = data["date"][0]
+        number_of_days = len(data.index)
         initial_open_price = data["open"][0]
         investment_amount = float(investment_amount)
-        bitcoins = investment_amount / initial_open_price
-        cash = 0
-        sell_executed = False
-        load_executed = False
-        sell_day = None
-        load_day = None
-        total_avg_closing_price = 0
-        number_of_days = len(data.index)
+        initial_bitcoins = investment_amount / initial_open_price
+        last_closing_amount = data["close"][number_of_days - 1]
 
-        for i in range(number_of_days):
-            base_date = start_date + pd.Timedelta(days=i)
-            price = data[data["date"] == base_date]
-            price_high = price["high"].values[0]
-            price_low = price["low"].values[0]
-            price_avg = price["average"].values[0]
+        # Hold
+        strategies = [
+            {
+                "bitcoin": initial_bitcoins,
+                "cash": 0,
+                "exit_amount": initial_bitcoins * last_closing_amount,
+                "sell_day": "NA",
+                "load_day": "NA",
+            }
+        ]
 
-            # Accumulate average closing prices
-            total_avg_closing_price += price_avg
+        # Only sell
+        only_sell_index = 0
+        for i in range(1, number_of_days):
+            if data["open"][i] > data["open"][only_sell_index]:
+                only_sell_index = i
+        only_sell_entry = data.loc[only_sell_index]
+        strategies.append(
+            {
+                "bitcoin": 0,
+                "cash": initial_bitcoins * only_sell_entry["open"],
+                "exit_amount": initial_bitcoins * only_sell_entry["open"],
+                "sell_day": str(data["date"][only_sell_index].date()),
+                "load_day": "NA",
+            }
+        )
 
-            # Decide when to sell: if predicted high price is 5% higher than the open price
-            if not sell_executed and price_high > initial_open_price * 1.05:
-                sell_executed = True
-                sell_day = base_date
-                cash = bitcoins * price_high
-                bitcoins = 0
+        # Sell and load
+        sell_index = 0
+        load_index = 0
+        max_index = 0
+        max_bitcoins = initial_bitcoins
+        for i in range(1, number_of_days):
+            entry = data.loc[i]
+            sell_cash = initial_bitcoins * data["open"][max_index]
+            load_bitcoins = sell_cash / entry["open"]
+            if load_bitcoins > max_bitcoins:
+                max_bitcoins = load_bitcoins
+                sell_index = max_index
+                load_index = i
+            if entry["open"] > data["open"][max_index]:
+                max_index = i
+        strategies.append(
+            {
+                "bitcoin": max_bitcoins,
+                "cash": 0,
+                "exit_amount": max_bitcoins * last_closing_amount,
+                "sell_day": str(data["date"][sell_index].date()),
+                "load_day": str(data["date"][load_index].date()),
+            }
+        )
 
-            # Decide when to load: after selling, if the predicted low price is 5% lower
-            if sell_executed and not load_executed and price_low < price_high * 0.95:
-                # Ensure not loading on the sell day
-                if base_date != sell_day:
-                    load_executed = True
-                    load_day = base_date
-                    bitcoins = cash / price_low
-                    cash = 0
+        # Evaluate for best strategy
+        best_strategy = strategies[0]
+        for i in range(len(strategies)):
+            if strategies[i]["exit_amount"] > best_strategy["exit_amount"]:
+                best_strategy = strategies[i]
 
-        # Calculate average closing price over the prediction period
+        # Calculate average closing price
+        total_avg_closing_price = data["average"].sum()
         average_closing_price = total_avg_closing_price / number_of_days
 
-        # Final valuation at the end of the prediction period or the last available day
-        final_day = start_date + pd.Timedelta(days=number_of_days - 1)
-        final_close_price = data.loc[data["date"] == final_day, "close"].values[0]
-        final_cash = cash if cash > 0 else bitcoins * final_close_price
-
-        # Calculate profit/loss
-        profit_loss = final_cash - investment_amount
-
         return {
-            "profit_loss": profit_loss,
+            "profit_loss": best_strategy["exit_amount"] - investment_amount,
             "total_investment_amount": investment_amount,
-            "total_exit_amount": final_cash,
+            "total_exit_amount": best_strategy["exit_amount"],
             "average_closing_price": average_closing_price,
-            "sell_day": str(sell_day.date()) if sell_day else "NA",
-            "load_day": str(load_day.date()) if load_day else "NA",
-            "final_bitcoins": bitcoins if cash == 0 else 0,
+            "sell_day": best_strategy["sell_day"],
+            "load_day": best_strategy["load_day"],
+            "final_bitcoins": best_strategy["bitcoin"],
         }

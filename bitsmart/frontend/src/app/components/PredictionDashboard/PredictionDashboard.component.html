@@ -1,9 +1,13 @@
 <mat-card class="card">
     <div class="container">
         <div class="left-column">
+            <div><p>Load Date:</p></div>
+            <mat-form-field appearance="outline">
+                <input matInput [value]="dataSource?.load_day !== 'NA' ? dataSource?.load_day : 'N/A'" readonly>
+            </mat-form-field>            
             <div><p>Best Load Price:</p></div>
             <mat-form-field appearance="outline">
-                <input matInput [value]="loadPrice | currency" readonly placeholder="$">
+                <input matInput [value]="dataLoaded ? (loadPrice ? (loadPrice | currency) : 'N/A') : ''" readonly placeholder="$">
             </mat-form-field>
             <p>Profit/Loss:</p>
             <mat-form-field appearance="outline">
@@ -17,9 +21,13 @@
             </mat-form-field>
         </div>
         <div class="right-column">
+            <div><p>Sell Date:</p></div>
+            <mat-form-field appearance="outline">
+                <input matInput [value]="dataSource?.sell_day !== 'NA' ? dataSource?.sell_day : 'N/A'" readonly>
+            </mat-form-field>            
             <div><p>Best Sell Price:</p></div>
             <mat-form-field appearance="outline">
-                <input matInput [value]="sellPrice | currency" readonly placeholder="$">
+                <input matInput [value]="dataLoaded ? (sellPrice ? (sellPrice | currency) : 'N/A') : ''" readonly placeholder="$">
             </mat-form-field>
             <p>Total Exit Amount:</p>
             <mat-form-field appearance="outline">

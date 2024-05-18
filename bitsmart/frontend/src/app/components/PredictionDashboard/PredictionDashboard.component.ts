@@ -25,6 +25,7 @@ export class PredictionDashboard implements OnInit {
     dataSource: any;
     loadPrice: number | null = null;
     sellPrice: number | null = null;
+    dataLoaded: boolean = false;
 
     constructor(
         private sharedService: SharedService
@@ -34,6 +35,7 @@ export class PredictionDashboard implements OnInit {
         this.sharedService.swingData$.subscribe(data => {
             if (data) {
                 this.dataSource = data;
+                this.dataLoaded = true;
                 console.log('Prediction Dashboard Data loaded:', this.dataSource);
             }
         });
